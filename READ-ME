@@ -1,0 +1,94 @@
+
+README for Root 
+
+@Author Sylvester Amponsah
+
+The Root.py file contains the source code to extract the data for manipulation.
+I have also included a unittest file named test_Root.py to facilitate the testing process.
+
+
+This is the problem statement: 
+
+Let's write some code to track driving history for people.
+
+The code will process an input file. You can either choose to accept the input via stdin (e.g. if you're using Ruby cat input.txt | ruby yourcode.rb), or as a file name given on the command line (e.g. ruby yourcode.rb input.txt). You can use any programming language that you want. Please choose a language that allows you to best demonstrate your programming ability.
+
+Each line in the input file will start with a command. There are two possible commands.
+
+The first command is Driver, which will register a new Driver in the app. Example:
+
+Driver Dan
+
+The second command is Trip, which will record a trip attributed to a driver. The line will be space delimited with the following fields: the command (Trip), driver name, start time, stop time, miles driven. Times will be given in the format of hours:minutes. We'll use a 24-hour clock and will assume that drivers never drive past midnight (the start time will always be before the end time). Example:
+
+Trip Dan 07:15 07:45 17.3
+
+Discard any trips that average a speed of less than 5 mph or greater than 100 mph.
+
+Generate a report containing each driver with total miles driven and average speed. Sort the output by most miles driven to least. Round miles and miles per hour to the nearest integer.
+
+Example input:
+
+Driver Dan
+Driver Alex
+Driver Bob
+Trip Dan 07:15 07:45 17.3
+Trip Dan 06:12 06:32 21.8
+Trip Alex 12:01 13:16 42.0
+Expected output:
+
+Alex: 42 miles @ 34 mph
+Dan: 39 miles @ 47 mph
+Bob: 0 miles
+
+
+
+To run the test_Root.py on terminal, navigate or change directory to the folder
+that contains Root.py, test1.txt, and test_Root.py and input the command
+python3 test_Root.py (I used python3 since this is the current version on my machine).
+
+This will run the tests and output the results.
+
+
+To run the Root.py file in an editor, open the file in any editor of your choice,
+(I have been running my test in Atom).
+Make sure the file name passed into the file = open('file.txt', 'r') is correct.
+For my testing, I used two text files (test1.txt and test3.txt), which I will include
+If you are running this in an editor, make sure print(lineOperation(file)) in
+line 144 is uncommented before you run the code.
+
+There are six methods in the Root.py source code.
+I broke the task into six methods to make the code more easy to follow
+and also make errors/bugs easier to find.
+
+The logic behind my code is as follows:
+
+ 1. lineOperation method reads each line in the text file to String.
+ 2. Relevant text (names, milages, and times) in each line is extracted using python's regular expression and stored in array.
+ 3. The different arrays of information is passed into calcOperation which processes the data and constructs the output result in an unsorted dictionary.
+ 4. The unsorted dictionary is then sorted and returned.
+ 5. The lineOperation method return statement is then printed to console.
+
+
+My reason for using this brute force method.............
+
+duplicity method will not be optimal for large dataset. Moreover, it does not work for more than one duplicate item. Text2.txt file has been added to the testing files to show that the output is not what is expected. This brute force approach works for this simple case.
+However, a more robust method for checking more than one duplicated items in a large dataset and returning their index could be implemented as follows:
+
+#from collections import Counter, defaultdict
+#
+def duplicates(list0):
+     counter = Counter(list0)
+     return [key for key in counter.keys() if counter[key]> 1]
+
+I am still working on this method, I will upload an updated version soon 
+def duplicates_indices(list0):
+   dup, indice = duplicates(list0), defaultdict(list)
+   for i, v in enumerate(list0):
+       if v in dup: indice[v].append(i)
+       return indice
+
+This will be the expected output once the method is completed 
+#using an example list0 = [‘Dan’, ‘John’, ‘Dan’, ‘Joe’, ‘John’, ‘Dan’, ‘Bob’]
+#print duplicates(list0) --> [‘Dan’, ‘John’]
+#print duplicates_indices(list0)  --> {‘Dan’: [0, 2, 5], ‘John’: [1,4]}

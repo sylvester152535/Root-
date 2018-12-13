@@ -1,0 +1,13 @@
+Driver Daniel
+Driver Prime
+Driver Joseph
+Driver Joshua
+Driver Luis
+Driver Sylvester
+Trip Daniel 06:12 06:32 21.8
+Trip Daniel 09:31 11:00 70.7
+Trip Prime 09:18 10:24 110.7
+Trip Joseph 12:01 13:16 42.0
+Trip Joshua 02:45 05:30 55.0
+Trip Luis 02:45 10:50 24.0
+Trip Sylvester 07:15 07:45 17.3
