@@ -70,23 +70,52 @@ The logic behind my code is as follows:
  5. The lineOperation method return statement is then printed to console.
 
 
-My reason for using this brute force method.............
+calcOperation only handles one duplicated item now. I am working on a generalized version to handling any number of duplicated names/items. 
 
-duplicity method will not be optimal for large dataset. Moreover, it does not work for more than one duplicate item. Text2.txt file has been added to the testing files to show that the output is not what is expected. This brute force approach works for this simple case.
-However, a more robust method for checking more than one duplicated items in a large dataset and returning their index could be implemented as follows:
 
-#from collections import Counter, defaultdict
-#
-def duplicates(list0):
-     counter = Counter(list0)
-     return [key for key in counter.keys() if counter[key]> 1]
 
-I am still working on this method, I will upload an updated version soon 
-def duplicates_indices(list0):
-   dup, indice = duplicates(list0), defaultdict(list)
-   for i, v in enumerate(list0):
-       if v in dup: indice[v].append(i)
-       return indice
+Handling duplicated items (checks for duplicated names)
+
+from collections import Counter
+
+Duplicate method returns a string array of all duplicated names in a list 
+
+def duplicates(list):
+    """Find all duplicate enteries in the list.
+
+    Params:
+    -------
+    l: list
+        The list to be scanned for duplicates.
+
+    Returns:
+    --------
+    dups: list
+        List containing all the duplicates of the original list l.
+    """
+    counter = Counter(list)
+    return [key for key in counter.keys() if counter[key]> 1]
+
+Dulicate_indices returns a dictionary of all the duplicated names and their indices 
+
+def duplicates_indices(list):
+    """Find the index location of all the duplicate entries in the list.
+
+    Params:
+    -------
+    l: list
+        The list to be scanned for duplicates.
+
+    Returns:
+    --------
+    out: dict
+        Dict containing all the duplicates and their associated index.
+    """
+    out = {}
+    for dup in duplicates(list):
+        indices = [i for i, x in enumerate(list) if x == dup]
+        out[dup] = indices
+    return out
 
 This will be the expected output once the method is completed 
 #using an example list0 = [‘Dan’, ‘John’, ‘Dan’, ‘Joe’, ‘John’, ‘Dan’, ‘Bob’]

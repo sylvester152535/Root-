@@ -2,6 +2,7 @@
 
 import re
 import datetime
+from collections import Counter
 
 file = open('test1.txt', "r")
 
@@ -31,21 +32,47 @@ def sortDictResult(dicts):
          end = keyy.index(')')
          print(keyy[beg+1:end-1])
 
-#For this simple case, this brute force approach works but for a large set of data this method would be highly inefficient
-# O(n^2) worst case time complexity performance
-def duplicity(driverNames):
-    duplicateIndex = []
-    for i in range(len(driverNames)):
-        for j in range(i+1, len(driverNames)):
-            if driverNames[i] == driverNames[j]:
-                duplicateIndex.append(i)
-                duplicateIndex.append(j)
-                return duplicateIndex
+def duplicates(list):
+    """Find all duplicate enteries in the list.
+
+    Params:
+    -------
+    l: list
+        The list to be scanned for duplicates.
+
+    Returns:
+    --------
+    dups: list
+        List containing all the duplicates of the original list l.
+    """
+    counter = Counter(list)
+    return [key for key in counter.keys() if counter[key]> 1]
+
+
+def duplicates_indices(list):
+    """Find the index location of all the duplicate enteries in the list.
+
+    Params:
+    -------
+    l: list
+        The list to be scanned for duplicates.
+
+    Returns:
+    --------
+    out: dict
+        Dict containing all the duplicates and their associated index.
+    """
+    out = {}
+    for dup in duplicates(list):
+        indices = [i for i, x in enumerate(list) if x == dup]
+        out[dup] = indices
+    return out
+
 
 #this method takes care of names that appear in the Driver command but do not register trips
 def peopleWithZeroMiles(sample, driverNames):
     uniq = []
-    something = []
+    #something = []
     for item in sample:
         if item not in driverNames:
             uniq.append(item)
@@ -59,10 +86,16 @@ def calOperation(allNames, drivenMiles, drivenTimes):
     drivenMiles+=[0]*difference
     #tempTime stores the result of the time operations (seconds) in an array
     tempTime = timeOperation(drivenTimes)
-    #corresponding times to names with no trips, 3600 to avoid to avoid division by zero integer, this works since corresponding milages have already been set to zero
+    #corresponding times to names with no trips, 3600 to avoid division by zero integer, this works since corresponding milages have already been set to zero
     tempTime+=[3600]*difference
-    #duplicateIndex stores the index of duplicate items
-    duplicateIndex = duplicity(allNames)
+
+    #Stores duplicated names in an array
+    temp_name = duplicates(allNames)
+    #stores a dictionary of all names and their indices of duplicated items
+    dict_duplicates = duplicates_indices(allNames)
+    #duplicateIndex stores the index of duplicate items in an array
+    duplicateIndex = dict_duplicates[temp_name[0]]
+
     #if there are duplicates, we add the relevant data to the second dupliated item and pop the index of the first duplicated item
     dicts = {}
     if duplicateIndex != None:
@@ -103,7 +136,7 @@ def calOperation(allNames, drivenMiles, drivenTimes):
     return dicts
 
 #lineOperation method extracts relevant data (Names, milages, and times) from the input file and stores them in a separate array.
-#Since sortDictResult doesn't have a return, lineOperation has to go in the print statement for the output to be on console 
+#Since sortDictResult doesn't have a return, lineOperation has to go in the print statement for the output to be on console
 def lineOperation(file):
     namesArray = []
     milesArray = []

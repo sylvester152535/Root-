@@ -6,7 +6,7 @@ class TestRoot(unittest.TestCase):
     def setUp(self):
             self.testArray = ['Dan', 'Bob', 'Alex', 'Zellinger', 'Dan']
             self.testArray1 = ['Dan', 'Bob', 'Bob', 'Zellinger', 'Dan']
-            self.testArray2 = ['Dan', 'Bob', 'Bob', 'Zellinger', 'Dan', 'Bob']
+            self.testArray2 = ['Dan', 'Bob', 'Bob', 'Zellinger', 'Dan', 'Bob',"Zellinger"]
             self.dict = {41:"Alex: 41 miles @ 33 mph", 38: "Dan: 38 miles @ 4 mph", 0:"Bob: 0 miles" }
             self.timesAA = ['07:15','07:45','06:12','06:32','12:01','13:16']
             self.names = ['Dan', 'Dan', 'Alex','Bob']
@@ -27,11 +27,18 @@ class TestRoot(unittest.TestCase):
     def test_sortDictResult(self):
         self.assertIsNone(Root.sortDictResult(self.dict))
 
-    ## Checks and return index of duplicated items. This simple brute force approach only works for one duplication
-    ## A more robust method for a large dataset will be introduced in the readme file
-    def test_duplicity(self):
-        self.assertEqual(Root.duplicity(self.testArray), [0,4])
-        self.assertNotEqual(Root.duplicity(self.testArray2), [0,4,1,2,5])
+
+    ## Checks and return string array of duplicated items/names
+    def test_duplicates(self):
+        self.assertEqual(Root.duplicates(self.testArray), ["Dan"])
+        self.assertEqual(Root.duplicates(self.testArray1), ["Dan","Bob"])
+        self.assertEqual(Root.duplicates(self.testArray2), ["Dan","Bob","Zellinger"])
+
+    #Checks and return dictionary of names and their indices
+    def test_duplicates_indices(self):
+        self.assertEqual(Root.duplicates_indices(self.testArray), {"Dan":[0,4]})
+        self.assertEqual(Root.duplicates_indices(self.testArray1), {"Dan":[0,4], "Bob":[1,2]})
+        self.assertEqual(Root.duplicates_indices(self.testArray2), {"Dan":[0,4], "Bob":[1,2,5], "Zellinger":[3,6]})
 
     #this method tests names from the Driver command that registered no trips
     def test_peopleWithZeroMiles(self):
