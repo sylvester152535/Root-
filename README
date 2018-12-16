@@ -41,8 +41,6 @@ Alex: 42 miles @ 34 mph
 Dan: 39 miles @ 47 mph
 Bob: 0 miles
 
-
-
 To run the test_Root.py on terminal, navigate or change directory to the folder
 that contains Root.py, test1.txt, and test_Root.py and input the command
 python3 test_Root.py (I used python3 since this is the current version on my machine).
@@ -69,10 +67,7 @@ The logic behind my code is as follows:
  4. The unsorted dictionary is then sorted and returned.
  5. The lineOperation method return statement is then printed to console.
 
-
 calcOperation only handles one duplicated item now. I am working on a generalized version to handling any number of duplicated names/items. 
-
-
 
 Handling duplicated items (checks for duplicated names)
 
