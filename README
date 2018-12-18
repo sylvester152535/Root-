@@ -71,7 +71,7 @@ calcOperation only handles one duplicated item now. I am working on a generalize
 
 Handling duplicated items (checks for duplicated names)
 
-from collections import Counter
+from collections import Counter 
 
 Duplicate method returns a string array of all duplicated names in a list 
 
