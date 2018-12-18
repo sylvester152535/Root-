@@ -16,7 +16,7 @@ The code will process an input file. You can either choose to accept the input v
 Each line in the input file will start with a command. There are two possible commands.
 
 The first command is Driver, which will register a new Driver in the app. Example:
-
+ 
 Driver Dan
 
 The second command is Trip, which will record a trip attributed to a driver. The line will be space delimited with the following fields: the command (Trip), driver name, start time, stop time, miles driven. Times will be given in the format of hours:minutes. We'll use a 24-hour clock and will assume that drivers never drive past midnight (the start time will always be before the end time). Example:
