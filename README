@@ -115,4 +115,4 @@ def duplicates_indices(list):
 This will be the expected output once the method is completed 
 #using an example list0 = [‘Dan’, ‘John’, ‘Dan’, ‘Joe’, ‘John’, ‘Dan’, ‘Bob’]
 #print duplicates(list0) --> [‘Dan’, ‘John’]
-#print duplicates_indices(list0)  --> {‘Dan’: [0, 2, 5], ‘John’: [1,4]}
+#print duplicates_indices(list0)  --> {‘Dan’: [0, 2, 5], ‘John’: [1,4]} 
